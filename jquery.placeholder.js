@@ -63,7 +63,7 @@
                 });
                 $(input[0].form).submit(function() {
                     fakeHTML.remove();
-                    input.show()
+                    input.show();
                 });
             }
         }
@@ -102,5 +102,5 @@
                 });
             }
         });
-    }
+    };
 })(jQuery);
