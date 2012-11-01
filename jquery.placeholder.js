@@ -74,9 +74,28 @@
             var input = $(this);
             var placeholder = new Placeholder(input);
             placeholder.show(true);
+			
+			var moveCursorToStart = function(el) {
+				var range = el.createTextRange();
+                range.collapse(true);
+                range.moveStart('character', 0);
+                range.select();
+			};
+			
             input.focus(function() {
+			if(!placeholder.valueIsPlaceholder()) {
                 placeholder.hide();
-            });
+            }
+			else {
+			    moveCursorToStart(this);
+			}
+			});
+			input.keydown(function() {
+				var value = input[0].value
+			    if (value == input.attr('placeholder')) {
+				    placeholder.hide();
+				}
+			});
             input.blur(function() {
                 placeholder.show(false);
             });
@@ -90,14 +109,12 @@
                     }
                     placeholder.show(true);
                 });
+
                 // What's even worse, the text cursor disappears
                 // when tabbing between text inputs, here's a fix
                 input.focus(function() {
                     if(this.value == "") {
-                        var range = this.createTextRange();
-                        range.collapse(true);
-                        range.moveStart('character', 0);
-                        range.select();
+                         moveCursorToStart(this);
                     }
                 });
             }
