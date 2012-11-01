@@ -74,28 +74,28 @@
             var input = $(this);
             var placeholder = new Placeholder(input);
             placeholder.show(true);
-			
-			var moveCursorToStart = function(el) {
-				var range = el.createTextRange();
+            
+            var moveCursorToStart = function(el) {
+                var range = el.createTextRange();
                 range.collapse(true);
                 range.moveStart('character', 0);
                 range.select();
-			};
-			
+            };
+            
             input.focus(function() {
-			if(!placeholder.valueIsPlaceholder()) {
+            if(!placeholder.valueIsPlaceholder()) {
                 placeholder.hide();
             }
-			else {
-			    moveCursorToStart(this);
-			}
-			});
-			input.keydown(function() {
-				var value = input[0].value
-			    if (value == input.attr('placeholder')) {
-				    placeholder.hide();
-				}
-			});
+            else {
+                moveCursorToStart(this);
+            }
+            });
+            input.keydown(function() {
+                var value = input[0].value
+                if (value == input.attr('placeholder')) {
+                    placeholder.hide();
+                }
+            });
             input.blur(function() {
                 placeholder.show(false);
             });
